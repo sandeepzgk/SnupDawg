@@ -59,6 +59,7 @@ client.onMessageArrived = function(message) {
 	if(json.single_tap==1 && json.activity==1)
 	{
 		motion=true;
+		clearInterval(motionTimer);
 		motionTimer=setInterval(function(){
 			clearInterval(motionTimer);
 			if(motion==true)
