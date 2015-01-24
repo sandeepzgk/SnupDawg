@@ -59,7 +59,7 @@ client.onMessageArrived = function(message) {
 	if(json.single_tap==1)
 	{
 		motionCounter+=1;
-		if(motionCounter>5)
+		if(motionCounter>10)
 				{
 					motionCounter = 0;
 					showNotification("Yay, I had a 5 second exercise, where is my treat !!","activity");
@@ -72,7 +72,7 @@ client.onMessageArrived = function(message) {
 		motionTimer=setInterval(function(){
 		clearInterval(motionTimer);
 			motionCounter=0;
-		},5000);
+		},1000);
 		motionCounter-=1;
 	}
   }
