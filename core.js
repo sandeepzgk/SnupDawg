@@ -19,6 +19,8 @@ client.connect({
   timeout:10
 });
 var ledInterval=-1;
+var firstTemp=-1;
+var tempDelta =1;
 // Function to trigger connection success.
 // Do the main JOBs here!
 function onSuccess() {
@@ -26,7 +28,7 @@ function onSuccess() {
 
   // Sample code for subscribe a specific topic.
   client.subscribe(API_ID+'/'+BOARD_ID+'/SENSE/8');
-
+  client.subscribe(API_ID+'/'+BOARD_ID+'/SENSE/3');
   // Sample code to emit a websocket message.
   var message = new Messaging.Message(JSON.stringify({
      "foo": "bar"
@@ -42,15 +44,31 @@ function onSuccess() {
 client.onMessageArrived = function(message) {
 
   var json=JSON.parse(message.payloadString);
-  debug(json.analog);
+  debug(message.payloadString);
   if(json.analog <=250)
   {
 	showNotification("It's dark out here, lemme bring my swag!","swag");
-	
-	
   }
-  
-  
+  if(json.temp)
+  {
+	  if(firstTemp==-1)
+		{
+			firstTemp = json.temp;
+		}
+		else
+		{
+		  var low=firstTemp-tempDelta;
+		  var high=firstTemp+tempDelta;
+		  if(json.temp < low)
+		  {
+			showNotification("Brr! Shiver me timbers...","temp");
+		  }
+		  if(json.temp > high)
+		  {
+			showNotification("I am feeling thirsty, can i get some water?","temp2");
+		  }
+		 }
+  }
 }
 
 // Function to trigger connection error.
