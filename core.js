@@ -25,7 +25,7 @@ function onSuccess() {
   debug("connection established");
 
   // Sample code for subscribe a specific topic.
-  client.subscribe(API_ID+'/'+BOARD_ID+'/SENSE/1');
+  client.subscribe(API_ID+'/'+BOARD_ID+'/SENSE/8');
 
   // Sample code to emit a websocket message.
   var message = new Messaging.Message(JSON.stringify({
@@ -39,7 +39,16 @@ function onSuccess() {
 
 // Attach a function when a new message is received.
 client.onMessageArrived = function(message) {
-  debug(message.payloadString);
+
+  var json=JSON.parse(message.payloadString);
+  debug(json.analog);
+  if(json.analog <=250)
+  {
+	showNotification("It's dark out here, lemme bring my swag!","swag");
+	
+  }
+  
+  
 }
 
 // Function to trigger connection error.
@@ -81,14 +90,24 @@ function playNotification()
 	tone.play();
 
 }
-
-function showNotification(str)
+var notificationType =[];
+function showNotification(str,type)
 {
-	
-   playNotification();
-   $(notification).append( '<div id="note" class="notebox" onClick="$(this).slideUp(500)">'+str+'</div>').children(':last').hide().fadeIn(800,"easeOutBack");
-			
+   if(notificationType.indexOf(type)==-1)
+   {
+	   playNotification();
+	   typeString = "'"+type+"'";
+	   $(notification).append( '<div class="notebox" onClick="$(this).slideUp(500);removeNotification('+typeString+');" >'+str+'</div>').children(':last').hide().fadeIn(800,"easeOutBack");
+	   notificationType.push(type);
+	}	
   
 }
 
+function removeNotification(type)
+{
+var index = notificationType.indexOf(type);
 
+if (index > -1) {
+    notificationType.splice(index, 1);
+}
+}
