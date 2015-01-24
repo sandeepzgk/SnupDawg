@@ -1,0 +1,1 @@
+chrome://flags/#disable-gesture-requirement-for-media-playback
