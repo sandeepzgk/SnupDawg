@@ -86,10 +86,8 @@ function showNotification(str)
 {
 	
    playNotification();
-   setTimeout(function(){
-	
-			$(notification).append( '<div id="note" class="notebox" onClick="$(this).slideUp(500)">'+str+'</div>').children(':last').hide().fadeIn(800,"easeOutBack");
-			},1000);
+   $(notification).append( '<div id="note" class="notebox" onClick="$(this).slideUp(500)">'+str+'</div>').children(':last').hide().fadeIn(800,"easeOutBack");
+			
   
 }
 
