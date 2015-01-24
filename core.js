@@ -6,9 +6,9 @@ var API_ID     = 'lg7kkdfayu',
 
 // Start new websocket istance.
 var client = new Messaging.Client("cloud.smartables.io", 8001, RandomClientId());
-console.log("Client instantiated.");
+debug("Client instantiated.");
 client.startTrace();
-console.log("Now trying to connect...");
+debug("Now trying to connect...");
 client.qos = 0;
 client.connect({
   useSSL: true,
@@ -22,7 +22,7 @@ client.connect({
 // Function to trigger connection success.
 // Do the main JOBs here!
 function onSuccess() {
-  console.log("connection established");
+  debug("connection established");
 
   // Sample code for subscribe a specific topic.
   client.subscribe(API_ID+'/'+BOARD_ID+'/SENSE/1');
@@ -39,15 +39,38 @@ function onSuccess() {
 
 // Attach a function when a new message is received.
 client.onMessageArrived = function(message) {
-  console.log(message.payloadString);
+  debug(message.payloadString);
 }
 
 // Function to trigger connection error.
 function onFailure() {
-  console.log("connection failure");
+  debug("connection failure");
 }
 
 // Attach a function when connection lost.
 client.onConnectionLost = function() {
-  console.log("connection lost");
+  debug("connection lost");
+}
+
+
+function debug(mystring)
+{
+	document.getElementById("debug").innerHTML += "<br/>" + timeConverter((new Date).getTime()) +": "+ mystring;
+	var objDiv = document.getElementById("debugcontainer");
+	objDiv.scrollTop = objDiv.scrollHeight;
+	console.log(mystring);
+}
+
+function timeConverter(UNIX_timestamp){
+  var a = new Date(UNIX_timestamp);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var date = a.getDate();
+  var hour = a.getHours();
+  var min = a.getMinutes();
+  var sec = a.getSeconds();
+ // var time = date + ',' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+ var time = hour + '.' + min + '.' + sec ;
+  return time;
 }
