@@ -13,6 +13,12 @@
       html,
       body {
         height: 100%;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
         /* The html and body elements cannot have any padding or margin. */
       }
 
@@ -28,7 +34,7 @@
       /* Set the fixed height of the footer here */
       #push,
       #footer {
-        height: 60px;
+        height: 9vh;
       }
       #footer {
         background-color: #f5f5f5;
@@ -51,7 +57,7 @@
       /* Not required for template or sticky footer method. */
 
       #wrap > .container {
-        padding-top: 60px;
+        padding-top: 5px;
       }
       .container .credit {
         margin: 20px 0;
@@ -63,7 +69,7 @@
 	  
 	  #debugcontainer
 	  {
-		height:60px;
+		height:9vh;
 		overflow-y: auto;
 	  }
 	  
@@ -88,6 +94,8 @@
 	  #notification
 	  {
 		width:100%;
+		overflow: auto;
+		height: 80vh;
 	  }
 
     </style>
