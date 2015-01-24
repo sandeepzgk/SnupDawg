@@ -18,7 +18,7 @@ client.connect({
   onFailure: onFailure,
   timeout:10
 });
-
+var ledInterval=-1;
 // Function to trigger connection success.
 // Do the main JOBs here!
 function onSuccess() {
@@ -35,6 +35,7 @@ function onSuccess() {
   message.qos = 2;
   message.retained = true;
   client.send(message);
+  stopLedCycle();
 }
 
 // Attach a function when a new message is received.
@@ -45,6 +46,7 @@ client.onMessageArrived = function(message) {
   if(json.analog <=250)
   {
 	showNotification("It's dark out here, lemme bring my swag!","swag");
+	
 	
   }
   
@@ -95,6 +97,10 @@ function showNotification(str,type)
 {
    if(notificationType.indexOf(type)==-1)
    {
+	   if(type=="swag")
+	   {
+		startLedCycle();
+	   }
 	   playNotification();
 	   typeString = "'"+type+"'";
 	   $(notification).append( '<div class="notebox" onClick="$(this).slideUp(500);removeNotification('+typeString+');" >'+str+'</div>').children(':last').hide().fadeIn(800,"easeOutBack");
@@ -105,9 +111,49 @@ function showNotification(str,type)
 
 function removeNotification(type)
 {
+
+if(type=="swag")
+{
+	stopLedCycle();
+}
 var index = notificationType.indexOf(type);
 
-if (index > -1) {
+if (index > -1)
+ {
     notificationType.splice(index, 1);
+ }
 }
+
+function startLedCycle()
+{
+	ledInterval=setInterval(ledRandom,300);
+}
+function stopLedCycle()
+{
+	clearInterval(ledInterval);
+	var message = new Messaging.Message(JSON.stringify({
+     "rgb":[1,0,0,0]	
+  }));
+  message.destinationName = API_ID+'/'+BOARD_ID+'/ACT/1';
+  message.qos = 2;
+  message.retained = true;
+  client.send(message);
+	ledInterval=-1;
+}
+function ledRandom()
+{
+
+	 var message = new Messaging.Message(JSON.stringify({
+     "rgb":[1,myRand(),myRand(),myRand()]	
+  }));
+  message.destinationName = API_ID+'/'+BOARD_ID+'/ACT/1';
+  message.qos = 2;
+  message.retained = true;
+  client.send(message);
+  
+}
+
+function myRand()
+{
+	return(Number(Math.random()*255));
 }
