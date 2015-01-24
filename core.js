@@ -22,7 +22,7 @@ var ledInterval=-1;
 var firstTemp=-1;
 var tempDelta =1;
 var motionTimer = -1;
-var motion=false;
+var motionCounter=0;
 // Function to trigger connection success.
 // Do the main JOBs here!
 function onSuccess() {
@@ -58,15 +58,15 @@ client.onMessageArrived = function(message) {
 	//if(json.single_tap==1 && json.double_tap==1 && json.activity==1)
 	if(json.activity==1)
 	{
-		motion=true;
+		motionCounter+=1;
 		if(motionTimer==-1)
 		{
 			motionTimer=setInterval(function(){
 			clearInterval(motionTimer);
 			motionTimer=-1;
-				if(motion==true)
+				if(motionCounter>5)
 				{
-					motion=false;
+					motionCounter = 0;
 					showNotification("Yay, I had a 5 second exercise, where is my treat !!","activity");
 				}
 			},5000);
@@ -75,7 +75,7 @@ client.onMessageArrived = function(message) {
 	}
 	else
 	{
-		motion=false;
+		motionCounter-=1;
 	}
   }
   if(json.temp)
