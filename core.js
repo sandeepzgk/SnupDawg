@@ -152,6 +152,7 @@ function showNotification(str,type)
 	   typeString = "'"+type+"'";
 	   $(notification).append( '<a href="img/button.jpg" data-lightbox="image-1" data-title="Actions"><div class="notebox" onClick="$(this).slideUp(500);removeNotification('+typeString+');" ><img class="rebecca" src="./img/snupmsg.png" alt="dog">'+str+'</div></a>').children(':last').hide().fadeIn(800,"easeOutBack");
 	   notificationType.push(type);
+       $( ".lb-dataContainer" ).innerHTML="";
 	}	
   
 }
