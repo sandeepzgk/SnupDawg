@@ -117,3 +117,15 @@ function playNotification()
 	foo.start();
 
 }
+
+function showNotification(str)
+{
+	 var notification = $(notification).add("div");
+	 notification.addClass("notebox");
+	 notification.fadeIn(400);
+}
+
+function hideNotification()
+{
+	 $(notification).fadeIn(400);
+}
