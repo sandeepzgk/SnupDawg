@@ -40,6 +40,7 @@ function onSuccess() {
 // Attach a function when a new message is received.
 client.onMessageArrived = function(message) {
   debug(message.payloadString);
+  playNotification();
 }
 
 // Function to trigger connection error.
@@ -73,4 +74,46 @@ function timeConverter(UNIX_timestamp){
  // var time = date + ',' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
  var time = hour + '.' + min + '.' + sec ;
   return time;
+}
+
+function Sound(source,volume,loop)
+{
+    this.source=source;
+    this.volume=volume;
+    this.loop=loop;
+    var son;
+    this.son=son;
+    this.finish=false;
+    this.stop=function()
+    {
+        document.body.removeChild(this.son);
+    }
+    this.start=function()
+    {
+        if(this.finish)return false;
+        this.son=document.createElement("embed");
+        this.son.setAttribute("src",this.source);
+        this.son.setAttribute("hidden","true");
+        this.son.setAttribute("volume",this.volume);
+        this.son.setAttribute("autostart","true");
+        this.son.setAttribute("loop",this.loop);
+        document.body.appendChild(this.son);
+    }
+    this.remove=function()
+    {
+        document.body.removeChild(this.son);
+        this.finish=true;
+    }
+    this.init=function(volume,loop)
+    {
+        this.finish=false;
+        this.volume=volume;
+        this.loop=loop;
+    }
+}
+var foo=new Sound("note.mp3",100,false);
+function playNotification()
+{
+	foo.start();
+
 }
