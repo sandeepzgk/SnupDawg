@@ -63,6 +63,7 @@ client.onMessageArrived = function(message) {
 			clearInterval(motionTimer);
 			if(motion==true)
 			{
+				motion=false;
 				showNotification("Yay, I had a 5 second exercise, where is my treat !!","activity");
 			}
 			},5000);
