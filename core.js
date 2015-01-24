@@ -89,7 +89,7 @@ function showNotification(str)
    setTimeout(function(){
 	
 			$(notification).append( '<div id="note" class="notebox" onClick="$(this).slideUp(500)">'+str+'</div>').children(':last').hide().fadeIn(800,"easeOutBack");
-			},3000);
+			},1000);
   
 }
 
