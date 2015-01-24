@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bootstrap 101 Template</title>
+    <title>Snup Dawg</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -35,7 +35,7 @@
       }
 
       /* Lastly, apply responsive CSS fixes as necessary */
-      @media (max-width: 767px) {
+      @media (max-width: 300px) {
         #footer {
           margin-left: -20px;
           margin-right: -20px;
@@ -70,10 +70,19 @@
 	  .notebox
 	  {
 		background: #2db34a;
-		border-radius: 6px
-		transition-property: background, border-radius;
-		transition-duration: 1s;
-		transition-timing-function: linear;
+		border-radius: 60px;
+		margin-bottom:10px;
+		padding-left:40px;
+		cursor: hand;
+		height:50px;
+		padding-top:28px;
+		font-size:40pt;
+		
+	  }
+	  
+	  #notification
+	  {
+		width:100%;
 	  }
 
     </style>
@@ -85,7 +94,7 @@
 	
 	
 	<div id="wrap">
-	 <div class="container">
+	 <div class="container" style="width:100%">
 	     <h1>Hello, world!</h1>
 		 <div id="notification"></div>
       </div>
@@ -98,6 +107,9 @@
 		</div>
 	</div>
 	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+	
+	
 	<script type="text/javascript" src="https://cloud.smartables.io/webSocketClient.js"></script>
 	<script type="text/javascript" src="core.js"></script>
 	<script type="text/javascript">

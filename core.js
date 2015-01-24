@@ -40,7 +40,6 @@ function onSuccess() {
 // Attach a function when a new message is received.
 client.onMessageArrived = function(message) {
   debug(message.payloadString);
-  playNotification();
 }
 
 // Function to trigger connection error.
@@ -120,12 +119,7 @@ function playNotification()
 
 function showNotification(str)
 {
-	 var notification = $(notification).add("div");
-	 notification.addClass("notebox");
-	 notification.fadeIn(400);
-}
-
-function hideNotification()
-{
-	 $(notification).fadeIn(400);
+	
+   playNotification();
+	$(notification).append( '<div id="note" class="notebox" onClick="$(this).slideUp(500)">'+str+'</div>').children(':last').hide().fadeIn(800,"easeOutBack");
 }
