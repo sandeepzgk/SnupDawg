@@ -75,7 +75,7 @@ client.onMessageArrived = function(message) {
 	}
 	else
 	{
-		motionCounter-=1;
+		motionCounter=0;
 	}
   }
   if(json.temp)
