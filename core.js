@@ -56,7 +56,7 @@ client.onMessageArrived = function(message) {
   if(json.single_tap)
   {
 	//if(json.single_tap==1 && json.double_tap==1 && json.activity==1)
-	if(json.single_tap==1 && json.activity==1)
+	if(json.activity==1)
 	{
 		motion=true;
 		clearInterval(motionTimer);
