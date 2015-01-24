@@ -59,15 +59,18 @@ client.onMessageArrived = function(message) {
 	if(json.activity==1)
 	{
 		motion=true;
-		clearInterval(motionTimer);
-		motionTimer=setInterval(function(){
+		if(motionTimer==-1)
+		{
+			motionTimer=setInterval(function(){
 			clearInterval(motionTimer);
-			if(motion==true)
-			{
-				motion=false;
-				showNotification("Yay, I had a 5 second exercise, where is my treat !!","activity");
-			}
+				if(motion==true)
+				{
+					motion=false;
+					showNotification("Yay, I had a 5 second exercise, where is my treat !!","activity");
+				}
 			},5000);
+		}
+		
 	}
 	else
 	{
