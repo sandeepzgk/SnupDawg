@@ -63,6 +63,7 @@ client.onMessageArrived = function(message) {
 		{
 			motionTimer=setInterval(function(){
 			clearInterval(motionTimer);
+			motionTimer=-1;
 				if(motion==true)
 				{
 					motion=false;
