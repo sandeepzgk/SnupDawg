@@ -21,6 +21,8 @@ client.connect({
 var ledInterval=-1;
 var firstTemp=-1;
 var tempDelta =1;
+var motionTimer = -1;
+var motion=false;
 // Function to trigger connection success.
 // Do the main JOBs here!
 function onSuccess() {
@@ -29,6 +31,7 @@ function onSuccess() {
   // Sample code for subscribe a specific topic.
   client.subscribe(API_ID+'/'+BOARD_ID+'/SENSE/8');
   client.subscribe(API_ID+'/'+BOARD_ID+'/SENSE/3');
+  client.subscribe(API_ID+'/'+BOARD_ID+'/SENSE/10_1');
   // Sample code to emit a websocket message.
   var message = new Messaging.Message(JSON.stringify({
      "foo": "bar"
@@ -45,9 +48,29 @@ client.onMessageArrived = function(message) {
 
   var json=JSON.parse(message.payloadString);
   debug(message.payloadString);
+  debug(message.destinationName);
   if(json.analog <=250)
   {
 	showNotification("It's dark out here, lemme bring my swag!","swag");
+  }
+  if(json.single_tap)
+  {
+	//if(json.single_tap==1 && json.double_tap==1 && json.activity==1)
+	if( json.activity==1)
+	{
+		motion=true;
+		motionTimer=setInterval(function(){
+			clearInterval(motionTimer);
+			if(motion==true)
+			{
+				showNotification("Yay, I had a 5 second exercise, where is my treat !!","activity");
+			}
+			},5000);
+	}
+	else
+	{
+		motion=false;
+	}
   }
   if(json.temp)
   {
@@ -68,6 +91,8 @@ client.onMessageArrived = function(message) {
 			showNotification("I am feeling thirsty, can i get some water?","temp2");
 		  }
 		 }
+		 
+		 
   }
 }
 
