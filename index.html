@@ -20,7 +20,7 @@
 		-ms-user-select: none;
 		user-select: none;
         /* The html and body elements cannot have any padding or margin. */
-        background:#FFF;
+        background:#45DEA4;
       }
 
       /* Wrapper for page content to push down footer */
@@ -98,6 +98,11 @@
 		overflow: auto;
 		height: 80vh;
 	  }
+         
+      #snup-header{
+        background-image: url(./img/snupdawg.jpg) no-repeat;
+        padding-left: 50px;
+      }
 
     </style>
   </head>
@@ -112,17 +117,12 @@
 	
 	<div id="wrap">
 	 <div class="container" style="width:100%">
-	  <div class="header">
-         
-            <!-- Header Menu -->  
-            <nav class="navbar navbar-default navbar-fixed-top">
-                <div class="navbar-header">
-                  <a class="navbar-brand text-muted" href="#">Woofie Gang</a>
-                </div>
-            </nav>
-      </div>
+	   <div id="snup-header">
 	     <h1 onClick="showNotification('mytest')">Snup Dawg</h1>
-		 <div id="notification"></div>
+       </div>
+           
+       <div id="notification"></div>
+           
       </div>
 	   <div id="push"></div>
     </div>
