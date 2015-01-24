@@ -150,7 +150,7 @@ function showNotification(str,type)
 	   }
 	   playNotification();
 	   typeString = "'"+type+"'";
-	   $(notification).append( '<div class="notebox" onClick="$(this).slideUp(500);removeNotification('+typeString+');" ><img src="./img/snupmsg.png" alt="dog">'+str+'</div>').children(':last').hide().fadeIn(800,"easeOutBack");
+	   $(notification).append( '<div class="notebox" onClick="$(this).slideUp(500);removeNotification('+typeString+');" ><img class="rebecca" src="./img/snupmsg.png" alt="dog">'+str+'</div>').children(':last').hide().fadeIn(800,"easeOutBack");
 	   notificationType.push(type);
 	}	
   
