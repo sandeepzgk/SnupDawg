@@ -51,7 +51,7 @@ client.onMessageArrived = function(message) {
   }
   if(json.temp)
   {
-	  if(firstTemp==-1)
+	  if(firstTemp ==-1)
 		{
 			firstTemp = json.temp;
 		}
