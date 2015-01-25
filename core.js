@@ -23,6 +23,7 @@ var firstTemp=-1;
 var tempDelta =1;
 var motionTimer = -1;
 var motionCounter=0;
+var notificationType =[];
 // Function to trigger connection success.
 // Do the main JOBs here!
 function onSuccess() {
@@ -139,9 +140,11 @@ function playNotification()
 	tone.play();
 
 }
-var notificationType =[];
+
 function showNotification(str,type)
 {
+	if(notificationType.indexOf(type)==-1)
+	{
 	   if(type=="swag")
 	   {
 		startLedCycle();
@@ -153,7 +156,7 @@ function showNotification(str,type)
 	   //<a href="img/button.jpg" data-lightbox="image-1" data-title="Actions"></a>
 	   $(notification).append( '<div class="notebox" onClick="$(this).slideUp(500);removeNotification('+typeString+');" ><img class="rebecca" src="./img/snupmsg.png" alt="dog">'+str+'</div>').children(':last').hide().fadeIn(800,"easeOutBack");
 	}	
-
+}
 function removeNotification(type)
 {
 
